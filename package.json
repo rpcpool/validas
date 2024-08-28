@@ -1,0 +1,50 @@
+{
+  "name": "validas",
+  "author": "Sammy Harris <sammy@staratlas.com>",
+  "version": "0.1.0",
+  "description": "Validate Metaplex Digital Asset Standard getAssetProof responses for Solana cNFTs",
+  "main": "dist/index.js",
+  "bin": "dist/index.js",
+  "scripts": {
+    "run": "ts-node src/index.ts",
+    "build": "rm -rf dist && tsc",
+    "check": "pnpm run format && pnpm run lint",
+    "fix": "pnpm run format:fix && pnpm run lint:fix",
+    "format": "prettier -c src/**/*.ts",
+    "format:fix": "prettier -w src/**/*.ts",
+    "lint": "eslint src --max-warnings=0 --ext ts",
+    "lint:fix": "eslint src --fix --ext ts",
+    "prepublishOnly": "pnpm run check && pnpm run build"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@commander-js/extra-typings": "^12.1.0",
+    "@metaplex-foundation/digital-asset-standard-api": "^1.0.4",
+    "@metaplex-foundation/mpl-bubblegum": "^4.2.0",
+    "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
+    "@metaplex-foundation/umi": "^0.8.10",
+    "@metaplex-foundation/umi-bundle-defaults": "^0.8.10",
+    "@solana/spl-account-compression": "^0.2.1",
+    "@supercharge/promise-pool": "^3.2.0",
+    "cli-progress": "^3.12.0",
+    "commander": "^12.1.0",
+    "limiter": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/cli-progress": "^3.11.6",
+    "@types/node": "^22.5.0",
+    "@typescript-eslint/eslint-plugin": "^8.3.0",
+    "@typescript-eslint/parser": "^8.3.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^8.10.0",
+    "prettier": "^3.3.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  },
+  "packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1"
+}

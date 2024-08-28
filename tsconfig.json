@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "ESNext",
+    "module": "commonjs",
+    "moduleResolution": "Node",
+    "allowJs": false,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": false,
+    "outDir": "dist"
+  },
+  "include": [
+    "src"
+  ]
+}
