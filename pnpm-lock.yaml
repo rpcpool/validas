@@ -29,9 +29,6 @@ importers:
       '@solana/spl-account-compression':
         specifier: ^0.2.1
         version: 0.2.1(@solana/web3.js@1.95.3(bufferutil@4.0.8)(utf-8-validate@5.0.10))(bufferutil@4.0.8)(utf-8-validate@5.0.10)
-      '@supercharge/promise-pool':
-        specifier: ^3.2.0
-        version: 3.2.0
       cli-progress:
         specifier: ^3.12.0
         version: 3.12.0
@@ -285,10 +282,6 @@ packages:
 
   '@solana/web3.js@1.95.3':
     resolution: {integrity: sha512-O6rPUN0w2fkNqx/Z3QJMB9L225Ex10PRDH8bTaIUPZXMPV0QP8ZpPvjQnXK+upUczlRgzHzd6SjKIha1p+I6og==}
-
-  '@supercharge/promise-pool@3.2.0':
-    resolution: {integrity: sha512-pj0cAALblTZBPtMltWOlZTQSLT07jIaFNeM8TWoJD1cQMgDB9mcMlVMoetiB35OzNJpqQ2b+QEtwiR9f20mADg==}
-    engines: {node: '>=8'}
 
   '@swc/helpers@0.5.12':
     resolution: {integrity: sha512-KMZNXiGibsW9kvZAO1Pam2JPTDBm+KSHMMHWdsyI/1DbIZjT2A6Gy3hblVXUMEDvUAKq+e0vL0X0o54owWji7g==}
@@ -1743,8 +1736,6 @@ snapshots:
       - bufferutil
       - encoding
       - utf-8-validate
-
-  '@supercharge/promise-pool@3.2.0': {}
 
   '@swc/helpers@0.5.12':
     dependencies:
