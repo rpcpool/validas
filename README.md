@@ -1,10 +1,21 @@
-# `data-source`
+# `validas`
 
-Abstraction over getting account updates from Solana. Supports RPC out of the box but can support other protocols
-through custom implementations.
+Validate Metaplex Digital Asset Standard getAssetProof responses for Solana cNFTs from multiple providers
 
-## Packages
+# Installation
 
-| Package                  | Description                                  | Version                                                                                                                            | Docs                                                                                                    |
-|:-------------------------|:---------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------|
-| `@staratlas/data-source` | TypeScript interface for Star Atlas programs | [![npm](https://img.shields.io/npm/v/@staratlas/data-source.svg?color=blue)](https://www.npmjs.com/package/@staratlas/data-source) | [![Docs](https://img.shields.io/badge/docs-typedoc-blue)](https://staratlasmeta.github.io/data-source/) |
+```shell
+npm install -g validas
+```
+
+# Usage
+
+```shell
+validas --help
+```
+
+Checking multiple providers
+
+```shell
+validas -t <tree-key> -e Endpoint1,<das-endpoint2-url> Endpoint2,<das-endpoint2-url>
+```
