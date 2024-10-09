@@ -40,7 +40,6 @@ function parseEndpoint(
   prev: Endpoint[] | undefined
 ): Endpoint[] {
   const split = input.split(',');
-  console.log("split", split);
 
   if (split.length !== 2) {
     throw new InvalidArgumentError(ENDPOINT_DESCRIPTION);
