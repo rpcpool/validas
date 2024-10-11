@@ -40,6 +40,7 @@ function parseEndpoint(
   prev: Endpoint[] | undefined
 ): Endpoint[] {
   const split = input.split(',');
+
   if (split.length !== 2) {
     throw new InvalidArgumentError(ENDPOINT_DESCRIPTION);
   }
@@ -52,7 +53,7 @@ function parseEndpoint(
 
   return (prev ?? []).concat({
     name: split[0],
-    url,
+    url: url,
   });
 }
 
@@ -62,6 +63,15 @@ function parseRateLimit(value: string) {
     throw new InvalidArgumentError('Not a number.');
   }
   return parsedValue;
+}
+function parseUrl(value: string) {
+  const url = value;
+  if (!/^https?:/.test(url)) {
+    throw new InvalidArgumentError(
+      'Endpoint URL must start with `http:` or `https:`.'
+    );
+  }
+  return value;
 }
 
 async function main() {
@@ -75,6 +85,11 @@ async function main() {
       '-e, --endpoint <label,url...>',
       `A list of endpoints to check. ${ENDPOINT_DESCRIPTION}`,
       parseEndpoint
+    )
+    .requiredOption(
+      '-c, --rpc <url>',
+      `An RPC url`,
+      parseUrl
     )
     .option(
       '-r, --rate-limit <number...>',
@@ -93,8 +108,8 @@ async function main() {
       'Whether to allow writing (and potentially overwriting) to the output-folder if it already exists',
       false
     )
-    .action(async ({ tree, endpoint, rateLimit, outputFolder, force }) => {
-      await run(tree, endpoint, rateLimit, outputFolder, force);
+    .action(async ({ tree, endpoint, rpc, rateLimit, outputFolder, force }) => {
+      await run(tree, endpoint, rpc, rateLimit, outputFolder, force);
     });
   await program.parseAsync(process.argv);
 }
@@ -102,6 +117,7 @@ async function main() {
 async function run(
   treeKey: PublicKey,
   endpoints: Endpoint[],
+  rpcUrl: string,
   rateLimit: number,
   proofDir: string,
   force: boolean
@@ -114,16 +130,18 @@ async function run(
   }
   fs.mkdirSync(proofDir, { recursive: true });
 
+  const rpc = createUmi(rpcUrl, { commitment: 'confirmed' });
   const umis = endpoints.map((endpoint) =>
     createUmi(endpoint.url, {
       commitment: 'confirmed',
     }).use(mplBubblegum())
   );
 
-  const treeConfigPda = findTreeConfigPda(umis[0], {
+  const treeConfigPda = findTreeConfigPda(rpc, {
     merkleTree: treeKey,
   });
-  const treeConfig = await fetchTreeConfig(umis[0], treeConfigPda);
+  const treeConfig = await fetchTreeConfig(rpc, treeConfigPda);
+
 
   const multiBar = new cliProgress.MultiBar({});
   const validBars = endpoints.map((endpoint) =>
